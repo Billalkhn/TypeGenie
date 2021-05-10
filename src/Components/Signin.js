@@ -1,10 +1,35 @@
-import React, { Component } from "react";
+import React, {  useState } from "react";
+import { useHistory } from 'react-router-dom';
 
-export default class SignIn extends Component {
-  render() {
+const axios = require('axios')
+
+
+ const  SignIn = () =>  {
+  const [email, setEmail] =  useState('')
+  const [password, setPasseord] =  useState('')
+
+ 
+  const history = useHistory();
+  const handleClick = () => {
+      history.push('editor')
+  }
+  const onLogin = async (email, password) => {
+    await axios
+      .post("http://localhost:28017/api/auth/login", {
+        email: email, 
+        password: password,
+      })
+      .then(function (response) {
+        console.log(response);
+        handleClick()
+      })
+      .catch(function (err) {
+        console.log(err)
+      })
+  };
     return (
-      <form style={{width: '450px' ,  padding: "40px 55px 45px 55px"}}>
-        <h3>Login</h3>
+      <div style={{ width: "450px", padding: "40px 55px 45px 55px" }}>
+      <h3>Login</h3>
 
         <div className="form-group">
           <label>Email address</label>
@@ -12,6 +37,8 @@ export default class SignIn extends Component {
             type="email"
             className="form-control"
             placeholder="Enter email"
+            value={email}
+            onChange={(event) => setEmail(event.target.value)}
           />
         </div>
 
@@ -21,6 +48,8 @@ export default class SignIn extends Component {
             type="password"
             className="form-control"
             placeholder="Enter password"
+            value={password}
+            onChange={(e) => setPasseord(e.target.value)}
           />
         </div>
 
@@ -37,14 +66,15 @@ export default class SignIn extends Component {
           </div>
         </div>
 
-        <button type="submit" className="btn btn-primary btn-block">
+        <button type="submit" className="btn btn-primary btn-block" onClick={() => onLogin(email,password)}>
           Submit
         </button>
 
         <p className="forgot-password  text-right   ">
           Needs to register <a href="sign-up">Register</a>
         </p>
-      </form>
-    );
-  }
+      </div>
+    );  
+  
 }
+export default SignIn

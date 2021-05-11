@@ -38,7 +38,7 @@ const Editor = () => {
       .pipe(input)
       .then(function (response) {
         setPredictData(response.get());
-      });
+      },[PredictData]);
   });
 
   console.log(PredictData);

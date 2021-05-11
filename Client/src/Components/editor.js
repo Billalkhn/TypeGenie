@@ -6,6 +6,26 @@ var Algorithmia = require("algorithmia");
 const Editor = () => {
   const [PreduictData, setPredictData] = useState([]);
 
+  const handleKeyPress = (e) => {
+    if (e.key === 'Tab' && e.shiftKey) {         
+      console.log("Detected Shift+Enter")
+    }
+    else if (e.keyCode === 27) {         
+      console.log("Detected ESC")
+    }
+    else if (e.key === "Tab" || e.keyCode === 9) {         
+      console.log("Detected Tab")
+    }
+    
+    
+  }
+
+
+
+
+
+
+
   useEffect(() => {
     var input = { sentence: "I" };
     Algorithmia.client("your Api")

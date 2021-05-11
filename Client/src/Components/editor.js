@@ -12,7 +12,7 @@ const Editor = () => {
   const handleKeyPress = (e) => {
     if (e.key === 'Tab' && e.shiftKey) {         
       console.log("Detected Shift+Enter")
-      for (var i=0;i<codelines.length;i++)
+      for (var i=0;i<PredictData.length;i++)
       {
         var words = PredictData[i].split(" ");
         firstWords.push(words[0]);
@@ -47,10 +47,10 @@ const Editor = () => {
     <div style={{ height: "100vh", width: "100vw" }}>
       <CKEditor
         editor={ClassicEditor}
-        data="<p>Here we will use the data and also recommend or predict some words to complete the sentence</p>"
+        data={data[0]}
         onReady={(editor) => {
           console.log(
-            "Here we will use the data and also recommend or predict some words to complete the sentence",
+            "we can use this now <STARTED>",
             editor
           );
         }}
